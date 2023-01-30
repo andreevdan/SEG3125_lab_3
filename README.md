@@ -11,7 +11,6 @@ Website Link: TBD...
 - Terrence Manly-Elliott 300078515
 
 
-The format in what we will be presenting the lab work,
-Each lab is on a new branch.
+
 
 
