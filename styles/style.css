@@ -50,6 +50,7 @@ table {
   margin-right: 70px;
   padding: 20px;
   border-radius: 10px;
+  
 }
 
 /* Defining styling for a specific element type - large block buttons */
@@ -166,4 +167,48 @@ li:hover ~ li p {
   align-items: center;
   height: 200px;
   
+}
+
+.news_style {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+
+
+
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+
+
+
+
+.news_style:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+.news_style input:checked ~ .checkmark {
+  background-color: #2196F3;
+}
+
+.news_style .checkmark:after {
+  top: 9px;
+ left: 9px;
+ width: 8px;
+ height: 8px;
+ border-radius: 50%;
+ background: white;
 }
