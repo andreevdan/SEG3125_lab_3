@@ -107,11 +107,14 @@ function restrictListProducts(prods, restrictions) {
 
 function getTotalPrice(chosenProducts) {
 	totalPrice = 0;
+
 	for (let i=0; i<products.length; i+=1) {
-		if (chosenProducts.indexOf(products[i].name) > -1){
-			totalPrice += products[i].price;
+		var quantity = document.getElementById(i).value;
+		if (quantity > 0){
+			totalPrice += products[i].price * quantity;
 		}
 	}
+
 	return totalPrice;
 }
 
@@ -146,15 +149,18 @@ function populateListProductChoices(slct1, slct2) {
     var optionArray = restrictListProducts(products, restrictions);
 
     for (i = 0; i < optionArray.length; i++) {
-        var checkbox = document.createElement("input");
-        checkbox.type = "checkbox";
-        checkbox.name = "product";
-        checkbox.value = optionArray[i].name;
-        s2.appendChild(checkbox);
+		var quantity = document.createElement("INPUT");
+		quantity.setAttribute("type", "number");
+		quantity.setAttribute("name", optionArray[i].name);
+		quantity.setAttribute("value", "0");
+		quantity.setAttribute("id", i);
+		s2.appendChild(quantity);
+
         var label = document.createElement('label');
         var labelPrice = document.createElement('label')
         label.htmlFor = optionArray[i].name;
         label.htmlFor = optionArray[i].price;
+		label.name = "product"
 		label.appendChild(document.createTextNode(optionArray[i].name));
         
 		var priceSymbol = "$CAD ";
@@ -180,8 +186,6 @@ function populateListProductChoices(slct1, slct2) {
 
 
 function selectedItems(){
-	
-	var ele = document.getElementsByName("product");
 	var chosenProducts = [];
 	
 	var c = document.getElementById('displayCart');
@@ -190,15 +194,15 @@ function selectedItems(){
 	var para = document.createElement("P");
 	para.innerHTML = "You selected : ";
 	para.appendChild(document.createElement("br"));
-	for (i = 0; i < ele.length; i++) { 
-		if (ele[i].checked) {
-			para.appendChild(document.createTextNode(ele[i].value));
+
+	for (i = 0; i < products.length; i++) { 
+		if(document.getElementById(i).value > 0){
+			para.appendChild(document.createTextNode(products[i].name));
 			para.appendChild(document.createElement("br"));
-			chosenProducts.push(ele[i].value);
+			chosenProducts.push(products[i].name);
 		}
 	}
-		
+
 	c.appendChild(para);
 	c.appendChild(document.createTextNode("Total Price is " + getTotalPrice(chosenProducts)));
-		
 }
