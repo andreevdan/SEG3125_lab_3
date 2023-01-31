@@ -108,10 +108,10 @@ function restrictListProducts(prods, restrictions) {
 function getTotalPrice(chosenProducts) {
 	totalPrice = 0;
 
-	for (let i=0; i<products.length; i+=1) {
-		var quantity = document.getElementById(i).value;
-		if (quantity > 0){
-			totalPrice += products[i].price * quantity;
+	for (let i=0; i<optionArray.length; i+=1) {
+		if(document.getElementById(i) != null && document.getElementById(i).value > 0){
+			var quantity = document.getElementById(i).value;
+			totalPrice += optionArray[i].price * quantity;
 		}
 	}
 
@@ -146,7 +146,7 @@ function populateListProductChoices(slct1, slct2) {
 	}
     s2.innerHTML = "";
 	
-    var optionArray = restrictListProducts(products, restrictions);
+    optionArray = restrictListProducts(products, restrictions);
 
     for (i = 0; i < optionArray.length; i++) {
 		var quantity = document.createElement("INPUT");
@@ -184,6 +184,7 @@ function populateListProductChoices(slct1, slct2) {
     }
 }
 
+var optionArray;
 
 function selectedItems(){
 	var chosenProducts = [];
@@ -195,14 +196,15 @@ function selectedItems(){
 	para.innerHTML = "You selected : ";
 	para.appendChild(document.createElement("br"));
 
-	for (i = 0; i < products.length; i++) { 
-		if(document.getElementById(i).value > 0){
-			para.appendChild(document.createTextNode(products[i].name));
+	for (i = 0; i < optionArray.length; i++) {
+		if(document.getElementById(i) != null && document.getElementById(i).value > 0){
+			console.log(optionArray[i].name);
+			para.appendChild(document.createTextNode(optionArray[i].name));
 			para.appendChild(document.createElement("br"));
-			chosenProducts.push(products[i].name);
+			chosenProducts.push(optionArray[i].name);
 		}
 	}
 
 	c.appendChild(para);
-	c.appendChild(document.createTextNode("Total Price is " + getTotalPrice(chosenProducts)));
+	c.appendChild(document.createTextNode("Total Price is " + getTotalPrice(chosenProducts).toFixed(2)));
 }
