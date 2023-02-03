@@ -1,4 +1,4 @@
-var products = [
+var products_produce = [
 	{
 		name: "Brocoli",
 		vegetarian: true,
@@ -18,30 +18,12 @@ var products = [
 		quantity: 0
 	},
 	{
-		name: "Gluten-free Bread",
-		vegetarian: true,
-        organic: true,
-        img: "images/gluten-free-bread.png",
-		glutenFree: true,
-		price: 2.44,
-		quantity: 0
-	},
-	{
 		name: "Organic Bananas",
 		vegetarian: true,
 		glutenFree: true,
         img: "images/organic-bananas.jpg",
         organic: true,
 		price: 3.35,
-		quantity: 0
-	},
-	{
-		name: "Bologna",
-		vegetarian: false,
-        organic: false,
-        img: "images/bologna.jpg",
-		glutenFree: false,
-		price: 5.13,
 		quantity: 0
 	},
 	{
@@ -53,15 +35,6 @@ var products = [
 		price: 6.50,
 		quantity: 0
 	},
-    {
-		name: "Bacon",
-		vegetarian: false,
-        organic: true,
-        img: "images/bacon.png",
-		glutenFree: true,
-		price: 6.99,
-		quantity: 0
-	},
 	{
 		name: "Organic Grapes",
 		vegetarian: true,
@@ -70,14 +43,28 @@ var products = [
         organic: true,
 		price: 8.85,
 		quantity: 0
-	},
+	}
+];
+
+
+
+var products_meats = [
 	{
-		name: "Gluten-free Brownies",
-		vegetarian: true,
-        img: "images/gluten-free-brownies.jpg",
-		glutenFree: true,
+		name: "Bologna",
+		vegetarian: false,
         organic: false,
-		price: 9.88,
+        img: "images/bologna.jpg",
+		glutenFree: false,
+		price: 5.13,
+		quantity: 0
+	},
+    {
+		name: "Bacon",
+		vegetarian: false,
+        organic: true,
+        img: "images/bacon.png",
+		glutenFree: true,
+		price: 6.99,
 		quantity: 0
 	},
     {
@@ -90,6 +77,29 @@ var products = [
 		quantity: 0
 	}
 ];
+
+var products_bakery = [
+	{
+		name: "Gluten-free Bread",
+		vegetarian: true,
+        organic: true,
+        img: "images/gluten-free-bread.png",
+		glutenFree: true,
+		price: 2.44,
+		quantity: 0
+	},
+	{
+		name: "Gluten-free Brownies",
+		vegetarian: true,
+        img: "images/gluten-free-brownies.jpg",
+		glutenFree: true,
+        organic: false,
+		price: 9.88,
+		quantity: 0
+	}
+];
+
+
 
 
 window.onload = defaultPageLoad();
@@ -156,28 +166,30 @@ function populateListProductChoices(slct1, slct2) {
 	}
     s2.innerHTML = "";
 	
-    optionArray = restrictListProducts(products, restrictions);
+    optionArray1 = restrictListProducts(products_produce, restrictions);
+	optionArray2 = restrictListProducts(products_meats, restrictions);
+	optionArray3 = restrictListProducts(products_bakery, restrictions);
 
-    for (i = 0; i < optionArray.length; i++) {
+    for (i = 0; i < optionArray1.length; i++) {
 		var quantity = document.createElement("INPUT");
 		quantity.setAttribute("type", "number");
-		quantity.setAttribute("name", optionArray[i].name);
+		quantity.setAttribute("name", optionArray1[i].name);
 		quantity.setAttribute("id", i);
 		quantity.setAttribute("value", "0");
 
 		var quantityValue = parseInt(quantity.value);
-		optionArray[i].quantity = quantityValue;
+		optionArray1[i].quantity = quantityValue;
 		s2.appendChild(quantity);
 
         var label = document.createElement('label');
         var labelPrice = document.createElement('label')
-        label.htmlFor = optionArray[i].name;
-        label.htmlFor = optionArray[i].price;
-		label.name = "product"
-		label.appendChild(document.createTextNode(optionArray[i].name));
+        label.htmlFor = optionArray1[i].name;
+        label.htmlFor = optionArray1[i].price;
+		label.name = "product_produce"
+		label.appendChild(document.createTextNode(optionArray1[i].name));
         
 		var priceSymbol = "$CAD ";
-		var price = optionArray[i].price.toFixed(2);
+		var price = optionArray1[i].price.toFixed(2);
 		var priceString = priceSymbol.concat(price);
 		labelPrice.appendChild(document.createTextNode(priceString));
         
@@ -188,17 +200,101 @@ function populateListProductChoices(slct1, slct2) {
 		s2.appendChild(document.createElement("br"));
 		s2.appendChild(document.createElement("br"));
         var image = document.createElement('img');
-        image.src = optionArray[i].img;
+        image.src = optionArray1[i].img;
 		
         image.setAttribute('width', '100px');
         image.setAttribute('height', '100px');
         label.appendChild(image);
         label.classList.add("img-left");
     }
+
 	selectedItems();
+
+	for (i = 0; i < optionArray2.length; i++) {
+		var quantity = document.createElement("INPUT");
+		quantity.setAttribute("type", "number");
+		quantity.setAttribute("name", optionArray2[i].name);
+		quantity.setAttribute("id", i);
+		quantity.setAttribute("value", "0");
+
+		var quantityValue = parseInt(quantity.value);
+		optionArray2[i].quantity = quantityValue;
+		s2.appendChild(quantity);
+
+        var label = document.createElement('label');
+        var labelPrice = document.createElement('label')
+        label.htmlFor = optionArray2[i].name;
+        label.htmlFor = optionArray2[i].price;
+		label.name = "product_meats"
+		label.appendChild(document.createTextNode(optionArray2[i].name));
+        
+		var priceSymbol = "$CAD ";
+		var price = optionArray2[i].price.toFixed(2);
+		var priceString = priceSymbol.concat(price);
+		labelPrice.appendChild(document.createTextNode(priceString));
+        
+		s2.appendChild(label);
+        s2.appendChild(document.createElement("br"));
+        s2.appendChild(labelPrice);
+        s2.appendChild(document.createElement("br"));
+		s2.appendChild(document.createElement("br"));
+		s2.appendChild(document.createElement("br"));
+        var image = document.createElement('img');
+        image.src = optionArray2[i].img;
+		
+        image.setAttribute('width', '100px');
+        image.setAttribute('height', '100px');
+        label.appendChild(image);
+        label.classList.add("img-left");
+    }
+	selectedItems2();
+
+	for (i = 0; i < optionArray3.length; i++) {
+		var quantity = document.createElement("INPUT");
+		quantity.setAttribute("type", "number");
+		quantity.setAttribute("name", optionArray3[i].name);
+		quantity.setAttribute("id", i);
+		quantity.setAttribute("value", "0");
+
+		var quantityValue = parseInt(quantity.value);
+		optionArray3[i].quantity = quantityValue;
+		s2.appendChild(quantity);
+
+        var label = document.createElement('label');
+        var labelPrice = document.createElement('label')
+        label.htmlFor = optionArray3[i].name;
+        label.htmlFor = optionArray3[i].price;
+		label.name = "product_bakery"
+		label.appendChild(document.createTextNode(optionArray3[i].name));
+        
+		var priceSymbol = "$CAD ";
+		var price = optionArray3[i].price.toFixed(2);
+		var priceString = priceSymbol.concat(price);
+		labelPrice.appendChild(document.createTextNode(priceString));
+        
+		s2.appendChild(label);
+        s2.appendChild(document.createElement("br"));
+        s2.appendChild(labelPrice);
+        s2.appendChild(document.createElement("br"));
+		s2.appendChild(document.createElement("br"));
+		s2.appendChild(document.createElement("br"));
+        var image = document.createElement('img');
+        image.src = optionArray3[i].img;
+		
+        image.setAttribute('width', '100px');
+        image.setAttribute('height', '100px');
+        label.appendChild(image);
+        label.classList.add("img-left");
+    }
+	
+	
+	selectedItems3();
+	
 }
 
-var optionArray;
+var optionArray1;
+var optionArray2;
+var optionArray3;
 
 function selectedItems(){
 	var chosenProducts = [];
@@ -210,15 +306,69 @@ function selectedItems(){
 	para.innerHTML = "You selected: ";
 	para.appendChild(document.createElement("br"));
 
-	for (i = 0; i < optionArray.length; i++) {
+	for (i = 0; i < optionArray1.length; i++) {
 		if(document.getElementById(i) != null && document.getElementById(i).value > 0){
-			console.log(optionArray[i].name);
+			console.log(optionArray1[i].name);
 			console.log(document.getElementById(i));
-			console.log(optionArray[i].quantity);
-			para.appendChild(document.createTextNode("$"+(document.getElementById(i).value) * optionArray[i].price + " - "));
-			para.appendChild(document.createTextNode(optionArray[i].name));
+			console.log(optionArray1[i].quantity);
+			para.appendChild(document.createTextNode("$"+(document.getElementById(i).value) * optionArray1[i].price + " - "));
+			para.appendChild(document.createTextNode(optionArray1[i].name));
 			para.appendChild(document.createElement("br"));
-			chosenProducts.push(optionArray[i].name);
+			chosenProducts.push(optionArray1[i].name);
+		}
+		
+	}
+
+	c.appendChild(para);
+	c.appendChild(document.createTextNode("Total Price is " + getTotalPrice(chosenProducts).toFixed(2)));
+}
+
+function selectedItems2(){
+	var chosenProducts = [];
+	
+	var c = document.getElementById('displayCart');
+	c.innerHTML = "";
+	
+	var para = document.createElement("P");
+	para.innerHTML = "You selected: ";
+	para.appendChild(document.createElement("br"));
+
+	for (i = 0; i < optionArray2.length; i++) {
+		if(document.getElementById(i) != null && document.getElementById(i).value > 0){
+			console.log(optionArray2[i].name);
+			console.log(document.getElementById(i));
+			console.log(optionArray2[i].quantity);
+			para.appendChild(document.createTextNode("$"+(document.getElementById(i).value) * optionArray2[i].price + " - "));
+			para.appendChild(document.createTextNode(optionArray2[i].name));
+			para.appendChild(document.createElement("br"));
+			chosenProducts.push(optionArray2[i].name);
+		}
+		
+	}
+
+	c.appendChild(para);
+	c.appendChild(document.createTextNode("Total Price is " + getTotalPrice(chosenProducts).toFixed(2)));
+}
+
+function selectedItems3(){
+	var chosenProducts = [];
+	
+	var c = document.getElementById('displayCart');
+	c.innerHTML = "";
+	
+	var para = document.createElement("P");
+	para.innerHTML = "You selected: ";
+	para.appendChild(document.createElement("br"));
+
+	for (i = 0; i < optionArray3.length; i++) {
+		if(document.getElementById(i) != null && document.getElementById(i).value > 0){
+			console.log(optionArray3[i].name);
+			console.log(document.getElementById(i));
+			console.log(optionArray3[i].quantity);
+			para.appendChild(document.createTextNode("$"+(document.getElementById(i).value) * optionArray3[i].price + " - "));
+			para.appendChild(document.createTextNode(optionArray3[i].name));
+			para.appendChild(document.createElement("br"));
+			chosenProducts.push(optionArray3[i].name);
 		}
 		
 	}
