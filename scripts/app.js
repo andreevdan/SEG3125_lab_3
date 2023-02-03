@@ -106,9 +106,9 @@ window.onload = defaultPageLoad();
 
 function defaultPageLoad(){
 	var r4 = document.getElementById("None").checked = true;
-	populateListProductChoices("None", 'displayProduct_produce', 1);
-	populateListProductChoices("None", 'displayProduct_meats', 2);
-	populateListProductChoices("None", 'displayProduct_bakery', 3);
+	populateListProductChoices("None", 'displayProduct_produce', products_produce);
+	populateListProductChoices("None", 'displayProduct_meats', products_meats);
+	populateListProductChoices("None", 'displayProduct_bakery', products_bakery);
 
 }
 
@@ -169,16 +169,7 @@ function populateListProductChoices(slct1, slct2, type_prod) {
 	}
     s2.innerHTML = "";
 	
-	if (type_prod == 1){
-		optionArray1 = restrictListProducts(products_produce, restrictions);
-		console.log("produce");
-	}else if (type_prod == 2){
-		optionArray1 = restrictListProducts(products_meats, restrictions);
-		console.log("meats");
-	}else{
-		optionArray1 = restrictListProducts(products_bakery, restrictions);
-		console.log("bakery");
-	}
+	optionArray1 = restrictListProducts(type_prod, restrictions);
     
 	
 
