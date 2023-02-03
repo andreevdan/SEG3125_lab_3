@@ -5,7 +5,8 @@ var products = [
         organic: false,
         img: "images/broccoli.jpg",
 		glutenFree: true,
-		price: 1.99
+		price: 1.99,
+		quantity: 0
 	},
 	{
 		name: "Cucumber",
@@ -13,7 +14,8 @@ var products = [
         img: "images/Cucumber.jpg",
 		glutenFree: true,
         organic: false,
-		price: 2.35
+		price: 2.35,
+		quantity: 0
 	},
 	{
 		name: "Gluten-free Bread",
@@ -21,7 +23,8 @@ var products = [
         organic: true,
         img: "images/gluten-free-bread.png",
 		glutenFree: true,
-		price: 2.44
+		price: 2.44,
+		quantity: 0
 	},
 	{
 		name: "Organic Bananas",
@@ -29,7 +32,8 @@ var products = [
 		glutenFree: true,
         img: "images/organic-bananas.jpg",
         organic: true,
-		price: 3.35
+		price: 3.35,
+		quantity: 0
 	},
 	{
 		name: "Bologna",
@@ -37,7 +41,8 @@ var products = [
         organic: false,
         img: "images/bologna.jpg",
 		glutenFree: false,
-		price: 5.13
+		price: 5.13,
+		quantity: 0
 	},
 	{
 		name: "Organic Apples",
@@ -45,7 +50,8 @@ var products = [
         organic: true,
         img: "images/organic-apple.jpg",
 		glutenFree: true,
-		price: 6.50
+		price: 6.50,
+		quantity: 0
 	},
     {
 		name: "Bacon",
@@ -53,7 +59,8 @@ var products = [
         organic: true,
         img: "images/bacon.png",
 		glutenFree: true,
-		price: 6.99
+		price: 6.99,
+		quantity: 0
 	},
 	{
 		name: "Organic Grapes",
@@ -61,7 +68,8 @@ var products = [
 		glutenFree: true,
         img: "images/organic-grapes.jpg",
         organic: true,
-		price: 8.85
+		price: 8.85,
+		quantity: 0
 	},
 	{
 		name: "Gluten-free Brownies",
@@ -69,7 +77,8 @@ var products = [
         img: "images/gluten-free-brownies.jpg",
 		glutenFree: true,
         organic: false,
-		price: 9.88
+		price: 9.88,
+		quantity: 0
 	},
     {
 		name: "Hot Dogs",
@@ -77,7 +86,8 @@ var products = [
         organic: false,
         img: "images/hotdogs.png",
 		glutenFree: true,
-		price: 10.00
+		price: 10.23,
+		quantity: 0
 	}
 ];
 
@@ -152,8 +162,11 @@ function populateListProductChoices(slct1, slct2) {
 		var quantity = document.createElement("INPUT");
 		quantity.setAttribute("type", "number");
 		quantity.setAttribute("name", optionArray[i].name);
-		quantity.setAttribute("value", "0");
 		quantity.setAttribute("id", i);
+		quantity.setAttribute("value", "0");
+
+		var quantityValue = parseInt(quantity.value);
+		optionArray[i].quantity = quantityValue;
 		s2.appendChild(quantity);
 
         var label = document.createElement('label');
@@ -200,10 +213,14 @@ function selectedItems(){
 	for (i = 0; i < optionArray.length; i++) {
 		if(document.getElementById(i) != null && document.getElementById(i).value > 0){
 			console.log(optionArray[i].name);
+			console.log(document.getElementById(i));
+			console.log(optionArray[i].quantity);
+			para.appendChild(document.createTextNode("$"+(document.getElementById(i).value) * optionArray[i].price + " - "));
 			para.appendChild(document.createTextNode(optionArray[i].name));
 			para.appendChild(document.createElement("br"));
 			chosenProducts.push(optionArray[i].name);
 		}
+		
 	}
 
 	c.appendChild(para);

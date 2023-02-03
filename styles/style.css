@@ -20,7 +20,7 @@ h1 {
 }
 
 h2 {
-  text-align:left;
+  text-align:center;
 }
 
 img {
@@ -32,6 +32,7 @@ img {
 }
 
 p {
+  text-align: center;
   color: white;
 }
 
@@ -42,6 +43,7 @@ table {
 
 /* Defining styling for a specific element type - each question */
 .question {
+  text-align: left;
   background-color: #333;
   color: white;
   margin-top: 20px;
@@ -68,12 +70,14 @@ table {
   cursor: pointer;
   padding: 15px;
   border-radius: 10px;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  transition-duration: 0.4s;
 }
 
-
-.img-left {
-  text-align: left;
-  box-align: left;
+.block:hover {
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+  background-color: #4CAF50; /* Green */
+  color: white;
 }
 
 /* Defining styling for a specific element with an id */
@@ -296,4 +300,21 @@ li:hover ~ li p {
   -webkit-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
+}
+
+* {
+  box-sizing:border-box;
+}
+body {
+  margin:20px;
+  background-color: #fafafa;
+}
+input {
+  width:5%;
+  resize: vertical;
+  padding:15px;
+  border-radius:15px;
+  border:0;
+  box-shadow:4px 4px 10px rgba(0,0,0,0.06);
+  height:15px;
 }
