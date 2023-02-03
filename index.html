@@ -29,15 +29,29 @@
 		Please specify your dietary restriction(s) (if any) below:
 	</a></div>
 
-	<div class="question" >
-		<div class = "news_style">
-			<input class="checkmark" id="Vegetarian" onchange="populateListProductChoices(this.id, 'displayProduct')" type="checkbox" name="Products" value="Vegetarian">Vegetarian<br>
-			<input class="checkmark" id="GlutenFree" onchange="populateListProductChoices(this.id, 'displayProduct')" type="checkbox" name="Products" value="GlutenFree">Gluten-Free<br>
-			<input class="checkmark" id="Organic" onchange="populateListProductChoices(this.id, 'displayProduct')" type="checkbox" name="Products" value="Organic">Organic<br>
-			<input class="checkmark" id="None" onchange="populateListProductChoices(this.id, 'displayProduct')" type="checkbox" name="Products" value="None">None<br>
-			<br>
-		</div>
-	</div>	
+
+	
+	<div class="question">
+		<label class="container">Vegetarian
+			<input id="Vegetarian" type="checkbox" checked="checked" name="Products" value="Vegetarian" onchange="populateListProductChoices(this.id, 'displayProduct')">
+			<span class="checkmark"></span>
+		  </label>
+		  
+		  <label class="container">Gluten-Free
+			<input type="checkbox" id="GlutenFree" onchange="populateListProductChoices(this.id, 'displayProduct')" type="checkbox" name="Products" value="GlutenFree">
+			<span class="checkmark"></span>
+		  </label>
+		  
+		  <label class="container">Organic
+			<input type="checkbox" id="Organic" onchange="populateListProductChoices(this.id, 'displayProduct')" type="checkbox" name="Products" value="Organic">
+			<span class="checkmark"></span>
+		  </label>
+		  
+		  <label class="container">None
+			<input type="checkbox" id="None" onchange="populateListProductChoices(this.id, 'displayProduct')" type="checkbox" name="Products" value="None">
+			<span class="checkmark"></span>
+		  </label>
+	</div>
 	</form>
 
 	<div class="question">
