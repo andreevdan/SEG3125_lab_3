@@ -205,8 +205,8 @@ function populateListProductChoices(slct1, slct2, type_prod) {
         var image = document.createElement('img');
         image.src = optionArray1[i].img;
 		
-        image.setAttribute('width', '100px');
-        image.setAttribute('height', '100px');
+        image.setAttribute('width', '130px');
+        image.setAttribute('height', '130px');
         label.appendChild(image);
         label.classList.add("img-left");
     }
