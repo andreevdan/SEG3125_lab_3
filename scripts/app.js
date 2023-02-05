@@ -131,10 +131,10 @@ function restrictListProducts(prods, restrictions) {
 function getTotalPrice(chosenProducts) {
 	totalPrice = 0;
 
-	for (let i=0; i<optionArray.length; i+=1) {
+	for (let i=0; i<optionArray1.length; i+=1) {
 		if(document.getElementById(i) != null && document.getElementById(i).value > 0){
 			var quantity = document.getElementById(i).value;
-			totalPrice += optionArray[i].price * quantity;
+			totalPrice += optionArray1[i].price * quantity;
 		}
 	}
 
@@ -207,7 +207,13 @@ function populateListProductChoices(slct1, slct2, type_prod) {
 		
         image.setAttribute('width', '130px');
         image.setAttribute('height', '130px');
+		image.setAttribute('align','left');
+		image.setAttribute('margin','100px');
         label.appendChild(image);
+		label.appendChild(document.createElement("br"));
+		label.appendChild(document.createElement("br"));
+		label.appendChild(document.createElement("br"));
+		label.appendChild(document.createElement("br"));
         label.classList.add("img-left");
     }
 
