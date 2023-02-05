@@ -106,28 +106,27 @@ window.onload = defaultPageLoad();
 
 function defaultPageLoad(){
 	var r4 = document.getElementById("None").checked = true;
-	populateListProductChoices("None", 'displayProduct_produce', products_produce);
-	populateListProductChoices("None", 'displayProduct_meats', products_meats);
-	populateListProductChoices("None", 'displayProduct_bakery', products_bakery);
+	populateListProductChoices("None", 'displayProduct_produce', 'produce');
+	populateListProductChoices("None", 'displayProduct_meats', 'meats');
+	populateListProductChoices("None", 'displayProduct_bakery', 'bakery');
 
 }
 
 function containerFunction(id) {
-	populateListProductChoices(id, 'displayProduct_produce', products_produce);
-	populateListProductChoices(id, 'displayProduct_meats', products_meats);
-	populateListProductChoices(id, 'displayProduct_bakery', products_bakery);
+	populateListProductChoices(id, 'displayProduct_produce', 'produce');
+	populateListProductChoices(id, 'displayProduct_meats', 'meats');
+	populateListProductChoices(id, 'displayProduct_bakery', 'bakery');
 }
 
 
 function restrictListProducts(prods, restrictions) {
 	let product_names = [];
-	console.log(prods);
 	for (let i=0; i<prods.length; i+=1) {
 		var restrict = false;
 		for (j=0; j<restrictions.length; j+=1){
-			if ((restrictions[j].value == "Vegetarian") 	&& (prods[i].vegetarian == false)) 	restrict = false;
-			if ((restrictions[j].value == "GlutenFree") 	&& (prods[i].glutenFree == false)) 	restrict = false;
-			if ((restrictions[j].value == "Organic") 		&& (prods[i].organic == false)) 	restrict = false;
+			if ((restrictions[j].value == "Vegetarian") 	&& (prods[i].vegetarian == false)) 	restrict = true;
+			if ((restrictions[j].value == "GlutenFree") 	&& (prods[i].glutenFree == false)) 	restrict = true;
+			if ((restrictions[j].value == "Organic") 		&& (prods[i].organic == false)) 	restrict = true;
 		}
 		if(restrict == false){
 			product_names.push(prods[i]);
@@ -149,9 +148,22 @@ function getTotalPrice(chosenProducts) {
 	return totalPrice;
 }
 
-function populateListProductChoices(slct1, slct2, type_prod) {
+function populateListProductChoices(slct1, slct2,type_prod) {
     var s1 = document.getElementById(slct1);
     var s2 = document.getElementById(slct2);
+	
+	var cat_prod;
+
+	if(type_prod == 'produce'){
+		cat_prod = products_produce;
+	}
+	else if (type_prod == 'meats'){
+		cat_prod = products_meats;
+	}
+	else if (type_prod == 'bakery')
+	{
+		cat_prod = products_bakery;
+	}
 
 	var r1 = document.getElementById("Vegetarian");
 	var r2 = document.getElementById("GlutenFree");
@@ -176,10 +188,7 @@ function populateListProductChoices(slct1, slct2, type_prod) {
 		}
 	}
     s2.innerHTML = "";
-	
-	console.log("Calling restrictListProducts");
-	optionArray1 = restrictListProducts(type_prod, restrictions);
-    
+	optionArray1 = restrictListProducts(cat_prod, restrictions);
 	
 
     for (i = 0; i < optionArray1.length; i++) {
@@ -245,10 +254,9 @@ function selectedItems(){
 	para.appendChild(document.createElement("br"));
 
 	for (i = 0; i < optionArray1.length; i++) {
+		console.log(document.getElementById(i));
+		console.log(document.getElementById(i).value);
 		if(document.getElementById(i) != null && document.getElementById(i).value > 0){
-			console.log(optionArray1[i].name);
-			console.log(document.getElementById(i));
-			console.log(optionArray1[i].quantity);
 			para.appendChild(document.createTextNode("$"+(document.getElementById(i).value) * optionArray1[i].price + " - "));
 			para.appendChild(document.createTextNode(optionArray1[i].name));
 			para.appendChild(document.createElement("br"));
