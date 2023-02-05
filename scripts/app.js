@@ -112,14 +112,22 @@ function defaultPageLoad(){
 
 }
 
+function containerFunction(id) {
+	populateListProductChoices(id, 'displayProduct_produce', products_produce);
+	populateListProductChoices(id, 'displayProduct_meats', products_meats);
+	populateListProductChoices(id, 'displayProduct_bakery', products_bakery);
+}
+
+
 function restrictListProducts(prods, restrictions) {
 	let product_names = [];
+	console.log(prods);
 	for (let i=0; i<prods.length; i+=1) {
 		var restrict = false;
 		for (j=0; j<restrictions.length; j+=1){
-			if ((restrictions[j].value == "Vegetarian") 	&& (prods[i].vegetarian == false)) 	restrict = true;
-			if ((restrictions[j].value == "GlutenFree") 	&& (prods[i].glutenFree == false)) 	restrict = true;
-			if ((restrictions[j].value == "Organic") 		&& (prods[i].organic == false)) 	restrict = true;
+			if ((restrictions[j].value == "Vegetarian") 	&& (prods[i].vegetarian == false)) 	restrict = false;
+			if ((restrictions[j].value == "GlutenFree") 	&& (prods[i].glutenFree == false)) 	restrict = false;
+			if ((restrictions[j].value == "Organic") 		&& (prods[i].organic == false)) 	restrict = false;
 		}
 		if(restrict == false){
 			product_names.push(prods[i]);
@@ -169,6 +177,7 @@ function populateListProductChoices(slct1, slct2, type_prod) {
 	}
     s2.innerHTML = "";
 	
+	console.log("Calling restrictListProducts");
 	optionArray1 = restrictListProducts(type_prod, restrictions);
     
 	
@@ -188,7 +197,7 @@ function populateListProductChoices(slct1, slct2, type_prod) {
         var labelPrice = document.createElement('label')
         label.htmlFor = optionArray1[i].name;
         label.htmlFor = optionArray1[i].price;
-		label.name = "product_produce"
+		label.name = s2;
 		label.appendChild(document.createTextNode(optionArray1[i].name));
         
 		var priceSymbol = "$CAD ";
