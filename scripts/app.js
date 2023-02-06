@@ -153,16 +153,19 @@ function populateListProductChoices(slct1, slct2,type_prod) {
     var s2 = document.getElementById(slct2);
 	
 	var cat_prod;
+	var count = 0;
 
 	if(type_prod == 'produce'){
 		cat_prod = products_produce;
 	}
 	else if (type_prod == 'meats'){
 		cat_prod = products_meats;
+		count += 5;
 	}
 	else if (type_prod == 'bakery')
 	{
 		cat_prod = products_bakery;
+		count += 8;
 	}
 
 	var r1 = document.getElementById("Vegetarian");
@@ -190,16 +193,18 @@ function populateListProductChoices(slct1, slct2,type_prod) {
     s2.innerHTML = "";
 	optionArray1 = restrictListProducts(cat_prod, restrictions);
 	
-
     for (i = 0; i < optionArray1.length; i++) {
 		var quantity = document.createElement("INPUT");
 		quantity.setAttribute("type", "number");
 		quantity.setAttribute("name", optionArray1[i].name);
-		quantity.setAttribute("id", i);
-		quantity.setAttribute("value", "0");
+		quantity.setAttribute("id", count);
+		quantity.setAttribute("value", optionArray1[i].quantity);
 
 		var quantityValue = parseInt(quantity.value);
+		console.log("Quantity Before: "+optionArray1[i].quantity);
+		console.log("The value is: "+ quantityValue);
 		optionArray1[i].quantity = quantityValue;
+		console.log("Quantity After: "+optionArray1[i].quantity);
 		s2.appendChild(quantity);
 
         var label = document.createElement('label');
@@ -240,29 +245,72 @@ function populateListProductChoices(slct1, slct2,type_prod) {
 	
 }
 
-var optionArray1;
+var optionArray1 = products_produce;
 
+var optionArray3 = products_bakery;
 
 function selectedItems(){
 	var chosenProducts = [];
 	
 	var c = document.getElementById('displayCart');
 	c.innerHTML = "";
-	
+	console.log("The length is: "+optionArray1.length);
+	//console.log("Function called on the following items: "+optionArray1[0].name + " and the quantity is: "+ optionArray1[0].quantity);
 	var para = document.createElement("P");
 	para.innerHTML = "You selected: ";
 	para.appendChild(document.createElement("br"));
-
+	count = -1;
 	for (i = 0; i < optionArray1.length; i++) {
-		console.log(document.getElementById(i));
-		console.log(document.getElementById(i).value);
-		if(document.getElementById(i) != null && document.getElementById(i).value > 0){
-			para.appendChild(document.createTextNode("$"+(document.getElementById(i).value) * optionArray1[i].price + " - "));
+		count++;
+		if(document.getElementById(count) != null && document.getElementById(count).value > 0){
+			console.log("Item name: "+ optionArray1[i].name);
+			console.log(document.getElementById(count));
+			console.log(document.getElementById(count).value);
+			optionArray1[i].quantity = document.getElementById(count).value;
+			console.log(optionArray1[i].quantity);
+
+			para.appendChild(document.createTextNode("$"+(document.getElementById(count).value) * optionArray1[i].price + " - "));
 			para.appendChild(document.createTextNode(optionArray1[i].name));
 			para.appendChild(document.createElement("br"));
 			chosenProducts.push(optionArray1[i].name);
 		}
 		
+	}
+
+	optionArray1 = products_meats;
+
+	for (i = 0; i < optionArray1.length; i++) {
+		count++;
+		if(document.getElementById(count) != null && document.getElementById(count).value > 0){
+			console.log("Item name: "+ optionArray1[i].name);
+			console.log(document.getElementById(count));
+			console.log(document.getElementById(count).value);
+			optionArray1[i].quantity = document.getElementById(count).value;
+			console.log(optionArray1[i].quantity);
+
+			para.appendChild(document.createTextNode("$"+(document.getElementById(count).value) * optionArray1[i].price + " - "));
+			para.appendChild(document.createTextNode(optionArray1[i].name));
+			para.appendChild(document.createElement("br"));
+			chosenProducts.push(optionArray1[i].name);
+		}
+	}
+
+	optionArray1 = products_bakery;
+
+	for (i = 0; i < optionArray1.length; i++) {
+		count++;
+		if(document.getElementById(count) != null && document.getElementById(count).value > 0){
+			console.log("Item name: "+ optionArray1[i].name);
+			console.log(document.getElementById(count));
+			console.log(document.getElementById(count).value);
+			optionArray1[i].quantity = document.getElementById(count).value;
+			console.log(optionArray1[i].quantity);
+
+			para.appendChild(document.createTextNode("$"+(document.getElementById(count).value) * optionArray1[i].price + " - "));
+			para.appendChild(document.createTextNode(optionArray1[i].name));
+			para.appendChild(document.createElement("br"));
+			chosenProducts.push(optionArray1[i].name);
+		}
 	}
 
 	c.appendChild(para);
